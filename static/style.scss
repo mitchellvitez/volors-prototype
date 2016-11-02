@@ -1,0 +1,16 @@
+$primary-color: #FF3428;
+$text-color: #444444;
+
+body {
+  font-family: Helvetica, sans-serif;
+  color: $text-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary-color;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}

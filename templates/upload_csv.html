@@ -1,0 +1,42 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+  <h1>Upload data</h1>
+
+  <p>The first row is data headers. The rightmost column is the one with classifications, and the rest are features. Only does classification problems. Doesn't do input scrubbing, etc, therefore THIS IS NOT SECURE.</p>
+
+  <p>Example well-formed data:</p>
+
+  <div>
+    <table>
+      <tr>
+        <th>Weight (kg)</th>
+        <th>Height (m)</th>
+        <th>Animal</th>
+      </tr>
+      <tr>
+        <td>6000</td>
+        <td>3.1</td>
+        <td>elephant</td>
+      </tr>
+      <tr>
+        <td>.04</td>
+        <td>.1</td>
+        <td>mouse</td>
+      </tr>
+      <tr>
+        <td>5600</td>
+        <td>2.5</td>
+        <td>elephant</td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <form method="POST" action="" enctype="multipart/form-data">
+      <p>Upload CSV <input type="file" name="data"/></p>
+      <p><input type="submit" value="submit"></p>
+    </form>
+  </div>
+</body>

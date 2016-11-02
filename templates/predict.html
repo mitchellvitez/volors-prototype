@@ -1,0 +1,26 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+  <h1>Predict</h1>
+
+  <p>Input a comma-separated list of features, and we'll tell you which classification the model predicts. Doesn't do input scrubbing, etc, therefore THIS IS NOT SECURE.</p>
+
+  <p>Example well-formed data:</p>
+
+  <pre>
+5500,2.9 
+  </pre>
+
+  <div>
+    <form method="POST" action="">
+      <select name="model">
+        {% for filename in models %}
+          <option value="{{filename}}">{{filename}}</option>
+        {% endfor %}
+      </select>
+      <p><input type="text" name="data" /></p>
+      <p><input type="submit" value="submit"></p>
+    </form>
+  </div>
+</body>
