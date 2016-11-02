@@ -2,4 +2,5 @@
 *.swo
 *.swn
 vim.exe.stackdump
+static/.sass-cache
 
