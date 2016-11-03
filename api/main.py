@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+import json
+from flask import Flask, render_template, request, jsonify
 import os
 import sklearn
 from sklearn import neighbors
@@ -15,32 +16,26 @@ def classify(data):
     clf.fit(np.delete(data, -1, 1), data[:,-1])
     return clf
 
-@app.route('/learn', methods=['GET', 'POST'])
+@app.route('/learn', methods=['POST'])
 def train():
-    if request.method == 'POST':
-        f = str(request.files['data'].read())
-        f = [row.split(',') for row in f.split('\\n')][:-1]
-        model_name = f[0][-1]
-        joblib.dump(classify(f[1:]), 'data/{}.pkl'.format(model_name))
-        return render_template('trained.html', model_name=model_name)
+    f = str(request.files['data'].read())
+    f = [row.split(',') for row in f.split('\\n')][:-1]
+    model_name = f[0][-1]
+    joblib.dump(classify(f[1:]), 'data/{}.pkl'.format(model_name))
+    return jsonify(model_name)
 
-    return render_template('upload_csv.html')
-
-@app.route('/predict', methods=['GET', 'POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
-    if request.method == 'POST':
-        clf = joblib.load('data/{}.pkl'.format(request.form['model']))
-        features = request.form['data'].split(',')
-        prediction = clf.predict(features)[0]
-        return render_template('prediction.html', prediction=prediction)
+    clf = joblib.load('data/{}.pkl'.format(request.form['model']))
+    features = request.form['data'].split(',')
+    prediction = clf.predict(features)[0]
+    return jsonify(prediction)
 
+@app.route('/models', methods=['GET'])
+def model_names():
     models = glob.glob('data/*.pkl')
     models = [os.path.splitext(os.path.basename(model))[0] for model in models]
-    return render_template('predict.html', models=models)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
+    return jsonify(models)
 
 if __name__ == "__main__":
     app.run(debug=True)
