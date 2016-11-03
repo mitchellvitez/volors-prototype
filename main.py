@@ -1,17 +1,18 @@
 from flask import Flask, render_template, request
-
+import os
 import sklearn
-from sklearn import tree
+from sklearn import neighbors
 from sklearn.externals import joblib 
 import numpy as np
 import glob
 
 app = Flask(__name__)
 
-def classify(f):
-    clf = tree.DecisionTreeClassifier()
-    f = np.array(f)
-    clf.fit(np.delete(f, -1, 1), f[:,-1])
+def classify(data):
+    clf = neighbors.KNeighborsClassifier()
+    data = np.array(data)
+    # clf.fit(all but last column, last column)
+    clf.fit(np.delete(data, -1, 1), data[:,-1])
     return clf
 
 @app.route('/learn', methods=['GET', 'POST'])
@@ -19,20 +20,27 @@ def train():
     if request.method == 'POST':
         f = str(request.files['data'].read())
         f = [row.split(',') for row in f.split('\\n')][:-1]
-        joblib.dump(classify(f[1:]), '{}.pkl'.format(f[0][-1]))
-        return "Trained to classify by {} and saved model to {}.pkl. Visit /predict to use this model.".format(f[0][-1], f[0][-1])
+        model_name = f[0][-1]
+        joblib.dump(classify(f[1:]), 'data/{}.pkl'.format(model_name))
+        return render_template('trained.html', model_name=model_name)
 
     return render_template('upload_csv.html')
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
-        clf = joblib.load('{}'.format(request.form['model']))
-        d = request.form['data'].split(',')
-        prediction = clf.predict(d)[0]
-        return "We predict class {}".format(prediction)
+        clf = joblib.load('data/{}.pkl'.format(request.form['model']))
+        features = request.form['data'].split(',')
+        prediction = clf.predict(features)[0]
+        return render_template('prediction.html', prediction=prediction)
 
-    return render_template('predict.html', models=glob.glob('*.pkl'))
+    models = glob.glob('data/*.pkl')
+    models = [os.path.splitext(os.path.basename(model))[0] for model in models]
+    return render_template('predict.html', models=models)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

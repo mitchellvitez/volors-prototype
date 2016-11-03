@@ -4,11 +4,11 @@
 <body>
   <h1>Upload data</h1>
 
-  <p>The first row is data headers. The rightmost column is the one with classifications, and the rest are features. Only does classification problems. Doesn't do input scrubbing, etc, therefore THIS IS NOT SECURE.</p>
+  <p>Make sure your first row has headers for your data, and the rightmost column contains the classes you want to group objects into. This sample only does classification problems, but we'll be adding more types of problems soon.</p>
 
   <p>Example well-formed data:</p>
 
-  <div>
+  <div class="content">
     <table>
       <tr>
         <th>Weight (kg)</th>
@@ -36,7 +36,7 @@
   <div>
     <form method="POST" action="" enctype="multipart/form-data">
       <p>Upload CSV <input type="file" name="data"/></p>
-      <p><input type="submit" value="submit"></p>
+      <p><input type="submit" class="button" value="submit"></p>
     </form>
   </div>
 </body>
