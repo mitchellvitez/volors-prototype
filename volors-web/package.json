@@ -1,7 +1,7 @@
 {
-  "name": "allenRob",
+  "name": "volors",
   "version": "1.0.0",
-  "description": "My personal react app",
+  "description": "Upload data, get predictions",
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",

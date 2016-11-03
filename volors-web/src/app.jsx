@@ -9,10 +9,10 @@ import { routes } from './constants';
 import store from './store';
 
 import { 
-		Navigator 
-		,HomePage
-		,LearnPage 
-		,PredictPage
+	Navigator 
+	,HomePage
+	,LearnPage 
+	,PredictPage
 } from './pages';
 
 render((
