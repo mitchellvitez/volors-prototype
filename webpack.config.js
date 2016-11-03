@@ -19,11 +19,11 @@ var devConfig = {
     devtool: 'source-map',
     module: {
         preLoaders: [
-            {
-                test: /\.jsx?$/,
-                loaders: ['eslint'],
-                exclude: /node_modules/
-            }
+            // {
+                // test: /\.jsx?$/,
+                // loaders: ['eslint'],
+                // exclude: /node_modules/
+            // }
         ],
         loaders: [
             {
@@ -33,7 +33,7 @@ var devConfig = {
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loaders: ['babel']
+                loaders: ['babel-loader']
             },
             {
                 test: /\.(eot|ttf|woff|woff2|otf)(\?\S*)?$/,
@@ -81,11 +81,11 @@ var buildConfig = {
     devtool: 'source-map',
     module: {
         preLoaders: [
-            {
-                test: /\.jsx?$/,
-                loaders: ['eslint'],
-                exclude: /node_modules/
-            }
+            // {
+                // test: /\.jsx?$/,
+                // loaders: ['eslint'],
+                // exclude: /node_modules/
+            // }
         ],
         loaders: [
             {
