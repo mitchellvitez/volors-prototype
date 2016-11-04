@@ -1,6 +1,10 @@
 @import 'constants.scss';
 
 #app {
+
+	*:focus {
+    outline: none;
+	}
 	
 	margin: 0;
 	font-family: "Proxima Nova","Open Sans","Gill Sans MT","Gill Sans",Corbel,Helvetica,Arial,sans-serif;
@@ -50,6 +54,24 @@
 		border: 2px solid $primary-color;
 		border-radius: 12px;
 		padding: 12px;
+	}
+
+	.input-button {
+		font-size: 120%;
+		width: 100%;
+		display: block;
+		margin: 20px auto;
+		border: 2px solid $primary-color;
+		border-radius: 12px;
+		padding: 12px;
+		background-color: $primary-color;
+		color: white; 
+	}
+
+	.input-button:hover {
+		background-color: darken($primary-color, 20%);
+		cursor: pointer;
+		border: 2px solid darken($primary-color, 20%);
 	}
 
 	.button {

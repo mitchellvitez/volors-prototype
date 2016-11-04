@@ -63,9 +63,10 @@ var devConfig = {
         contentBase: './public',
         proxy: {
             '/api': {
-                target: 'http://localhost:9090',
+                target: 'http://localhost:5000',
                 xfwd: true,
-                changeOrigin: true
+                changeOrigin: true,
+                pathRewrite: {'^/api' : ''}
             }
         }
     }
@@ -135,9 +136,10 @@ var buildConfig = {
         proxy: {
             // proxy to production api
             '/api': {
-                target: 'http://localhost:9090',
+                target: 'http://localhost:5000',
                 xfwd: true,
-                changeOrigin: true
+                changeOrigin: true,
+                pathRewrite: {'^/api' : ''}
             }
         }
     }
