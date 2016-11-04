@@ -51,6 +51,8 @@ class LearnPage extends React.Component {
 		return (
 			<div className="learn-page">
 				<h1>Upload data</h1>
+				<div style={{marginTop: '20px'}}></div>
+				<div className="container">
 					<p>
 						Make sure your first row has headers for your data, 
 						and the rightmost column contains the classes you want to group objects into. 
@@ -88,13 +90,13 @@ class LearnPage extends React.Component {
 
 				<div>
 					<form>
-						<p>Upload CSV 
-							<input type="file" name="data" onClick={this.setStartedUpload} 
-							onChange={(e) => {this.uploadFile(e)}}/>
-						</p>
+						<p>Upload CSV</p>
+						<input type="file" name="data" onClick={this.setStartedUpload} 
+								onChange={(e) => {this.uploadFile(e)}}/>
 					</form>
-					<p><button className="input-button" onClick={this.submitData}>submit</button></p>
+					<button className="input-button" onClick={this.submitData}>submit</button>
 				</div>
+			</div>
 			</div>
 		);
 	}

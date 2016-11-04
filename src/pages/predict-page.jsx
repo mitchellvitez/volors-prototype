@@ -38,26 +38,25 @@ class PredictPage extends React.Component {
 
 		return (
 			<div className="predict-page">
-				<h1>Define features</h1>
 
-				<p>Input a comma-separated list of features, and we'll tell you which classification the model predicts. Doesn't do input scrubbing, etc, therefore THIS IS NOT SECURE.</p>
-				<p>Example well-formed data:</p>
-				<p><code>5500,2.9</code></p>
+				<h1>Predict from Data</h1>
+				<div style={{marginTop: '20px'}}></div>
+				<div className="container">
 
-				<div>
-					<form>
+					<div className="row">
+						<p className="text-center">First you need to select a model:</p>
 						<Select
 								className="react-select"
 								name="selectModels"
+								placeholder="Select Model..."
 								value={this.state.currentModel}
 								options={options}
 								onChange={this.modelChange}
 						/>
-						<p><input type="text" name="data" /></p>
-						<p><input type="submit" className="button" value="submit"/></p>
-					</form>
+					</div>
 				</div>
 			</div>
+				
 		);
 	}
 }
