@@ -46,7 +46,27 @@
 		margin: 20px 20%;
 	}
 
-	input {
+	.react-select {
+		max-width: 300px;
+		display: block;
+		position: relative;
+		left: calc(50% - 150px);
+		
+	}
+
+	.Select-menu-outer {
+		position: relative;
+		z-index: 1;
+		border-top: 0;
+	}
+
+	.Select-control {
+		border: 2px solid $primary-color;
+		border-radius: 12px;
+		z-index: 3;
+	}
+
+	*:not(.Select-input) > input {
 		font-size: 120%;
 		width: 100%;
 		display: block;
