@@ -4,3 +4,7 @@
 vim.exe.stackdump
 static/.sass-cache
 
+node_modules
+.DS_Store
+
+public
