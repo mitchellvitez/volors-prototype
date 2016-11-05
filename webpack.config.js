@@ -56,7 +56,11 @@ var devConfig = {
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"development"'
-        })
+        }),
+        new CopyWebpackPlugin([
+            {context: "./src/favicon/", from: '**/*', to: './favicon/'},
+            {context: "./src/vendor/", from: '**/*', to: './vendor/'}
+        ])
     ],
     devServer: {
         historyApiFallback: true,
