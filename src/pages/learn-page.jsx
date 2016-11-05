@@ -43,7 +43,7 @@ class LearnPage extends React.Component {
 
 	submitData(){
 		if (this.state && this.state.encoded){
-			Requests.fetchPostLearn(this.state.encoded).then(response => {
+			Requests.postLearn(this.state.encoded).then(response => {
 				if (response.status == 200){
 					response.json().then(model => {
 						console.log(model)

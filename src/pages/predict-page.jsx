@@ -5,25 +5,51 @@ import 'react-select/dist/react-select.css';
 
 import { RouteActions } from '../actions';
 import { routes } from '../constants';
+import Requests from '../requests';
 
 class PredictPage extends React.Component {
 
 	constructor(){
 		super();
-		let models = ['Animal', 'Food', 'Sport', 'Movie'];
-		this.state = {
-			models
-		};
+		this.state = {};
 		this.modelChange = this.modelChange.bind(this);
 	}
 
 	componentWillMount(){
 		this.props.dispatch(RouteActions.setAppRoute(routes.PREDICT));
+
+		Requests.getModels().then(response => {
+			if (response.status == 200){
+
+				response.json().then(models => {
+					this.setState({ models });
+				})
+
+			} else {
+				console.log('error getting models');
+			}
+			
+		})
 	}
 
-	modelChange(val){
-		console.log(val)
-		this.setState({currentModel: val});
+	modelChange(selection){
+		this.setState({currentSelection: selection});
+
+		if (selection && selection.value){
+			let model = selection.value;
+			Requests.getHeaders(model).then(response => {
+				if (response.status == 200){
+
+					response.json().then(headers => {
+						console.log(headers);
+					})
+
+				} else {
+					console.log('error getting headers for ', model);
+				}
+			})
+		}
+		
 	}
 
 	render () {
@@ -49,7 +75,7 @@ class PredictPage extends React.Component {
 								className="react-select"
 								name="selectModels"
 								placeholder="Select Model..."
-								value={this.state.currentModel}
+								value={this.state.currentSelection}
 								options={options}
 								onChange={this.modelChange}
 						/>
