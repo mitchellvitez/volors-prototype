@@ -2,11 +2,12 @@
 *.swo
 *.swn
 vim.exe.stackdump
-static/.sass-cache
 
 node_modules
-.DS_Store
-
+npm-debug.log
 public
 
+.DS_Store
+
 api/__pycache__
+
