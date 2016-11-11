@@ -55,7 +55,7 @@ var devConfig = {
             template: './src/index.html'
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"development"'
+            'process.env.NODE_ENV': '"production"'
         }),
         new CopyWebpackPlugin([
             {context: "./src/favicon/", from: '**/*', to: './favicon/'},
