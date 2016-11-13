@@ -1,9 +1,3 @@
-import pandas as pd
-import numpy as np
-import werkzeug as wz
-import math
-
-def get_data_from_file(f_name):
 ''' this module, get_data.py, is a module for handling data input
 
 This module contains the functions get_data_from_file and is_usable
@@ -15,18 +9,24 @@ import pandas as pd
 import numpy as np
 import werkzeug as wz
 
-def get_data_from_file(f_name):
+def get_data_from_file(f_name, test_mode=False):
     '''This function collects data from a csv and returns the headers and data
 
     argument: a working filename for a csv in this directory 
     modifies: nothing
     returns: the headers of the csv as a list, and the data contained in the csv as an ndarray
     notes:
-        uses pandas' default header inference to determine what are headers
+        1) uses pandas' default header inference to determine what are headers
+        2) DO NOT set test_mode = True in production
     '''
 
     #create a safe filename
     safe_f = wz.secure_filename(f_name)
+
+    #if we're in test_mode get rid of the safety check by keeping the original file
+    #This should NOT happen in production code
+    safe_f = f_name
+
     #pandas will infer headers or not by default, I'm willing to trust them to do a better job than I
     data_frame = pd.read_csv(safe_f)
     #we're only gonna want the data as a numpy array, not the headers
@@ -54,16 +54,3 @@ def is_usable(data):
         return False
     #both criteria were met
     return True
-
-def main():
-    sample_test_file = "sample.csv"
-    types_test_file = "types_test.csv"
-    missing_data_test_file = "missing_data_test.csv"
-    files = [sample_test_file, types_test_file, missing_data_test_file]
-    for f in files:
-        print get_data_from_file(f)[1]
-        print check_data_usability(get_data_from_file(f)[1])
-        print ""
-
-if __name__ == "__main__" :
-    main()
