@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import unittest
-import numpy as np
 import get_data
+import numpy as np
 import knn_classifier as knn_c
 from sklearn import datasets
 
