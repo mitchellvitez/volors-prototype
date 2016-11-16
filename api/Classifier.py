@@ -29,8 +29,7 @@ class Classifier:
         The format for the filename of the model is "knn_model_to_classify_"+<header name of response var>
         '''
 
-        joblib.dump(self.trained_clf, name+"_model_to_classify_"+str(self.to_predict))
-        return
+        joblib.dump(self.trained_clf, name+"_model_to_classify_"+str(self.to_predict)+".model")
     
     def load_model(self, name="generic"):
         ''' loads a copy of the model from disk in case when we want to use it
@@ -38,7 +37,7 @@ class Classifier:
         The format for the filename of the model is "knn_model_to_classify_"+<header name of response var>
         '''
 
-        clf = joblib.load(name+"_model_to_classify_"+str(self.to_predict))
+        clf = joblib.load(name+"_model_to_classify_"+str(self.to_predict)+".model")
         return clf
 
     def get_train_features_and_response(self):

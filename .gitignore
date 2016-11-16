@@ -2,6 +2,7 @@
 *.swo
 *.swn
 *.pyc
+*.model
 vim.exe.stackdump
 
 node_modules

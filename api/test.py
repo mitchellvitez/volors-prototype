@@ -31,6 +31,15 @@ class TestTestingFramework(unittest.TestCase):
         self.assertGreater(score, .9)
         self.assertEqual(5, clf.get_params()["n_neighbors"])
         
+        #this prefix would probably need to be much more descriptive in production
+        knn_clf.save_model(name="knn")
+        recovered_clf = knn_clf.load_model(name="knn")
+
+        #this is NOT how this would be used; I'm just doing it this way to grab a test dataset
+        train_features, train_response = knn_clf.get_train_features_and_response()
+
+        recovered_metric = recovered_clf.score(train_features, train_response)
+        self.assertEqual(score, recovered_metric)
 
 if __name__ == '__main__':
     unittest.main()

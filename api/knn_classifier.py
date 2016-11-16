@@ -44,33 +44,6 @@ class KNN_classifier(Classifier.Classifier):
         #returns the trained model 
         return self.get_trained_model(clf, train_features, train_response)
 
-def main():
-    ''' This method contains some basic sanity checks to see if the knn_classifier crator above is working
-
-    Uses the sklearn iris dataset to test whether the KNN_classifier class and its train_model wunction are
-    completely broken
-    '''
-
-    from sklearn import datasets
-    iris = datasets.load_iris()
-    #add sklearn's response variable into the dataset like it would be in our layout
-    added_response = np.array([ np.append(i,[j]) for i,j in zip(iris.data, iris.target)])
-    #feed the iris dataset in as it would be if it were given by a user
-    knn_clf = KNN_classifier(added_response, iris.feature_names+["response"], 'response')
-    clf, score, = knn_clf.train_model()
-    print clf
-    print score
-    
-    #this prefix would probably need to be much more descriptive in production
-    knn_clf.save_model(name="knn")
-    recovered_clf = knn_clf.load_model(name="knn")
-
-    #this is NOT how this would be used; I'm just doing it this way to grab a test dataset
-    train_features, train_response = knn_clf.get_train_features_and_response()
-
-    recovered_metric = recovered_clf.score(train_features, train_response)
-    print recovered_clf
-    print recovered_metric
 
 if __name__ == "__main__":
     main()
