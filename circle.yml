@@ -1,6 +1,3 @@
-dependencies:
-    pre:
-        - sudo pip install -r ./api/requirements.txt
 test:
   override:
     - python ./api/test.py
