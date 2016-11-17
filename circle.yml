@@ -1,4 +1,4 @@
 test:
   override:
     - python ./api/test.py
-    # - npm test
+    - npm test
