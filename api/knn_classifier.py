@@ -45,6 +45,3 @@ class KNN_classifier(Classifier.Classifier):
         return self.get_trained_model(clf, train_features, train_response)
 
 
-if __name__ == "__main__":
-    main()
-

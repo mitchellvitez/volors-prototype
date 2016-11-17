@@ -13,8 +13,8 @@ class TestTestingFramework(unittest.TestCase):
         self.assertEqual('word', 'word')
 
     def test_get_data(self):
-        types_test_file = "test/test_data/types_test.csv"
-        missing_data_test_file = "test/test_data/missing_data_test.csv"
+        types_test_file = "api/test/test_data/types_test.csv"
+        missing_data_test_file = "api/test/test_data/missing_data_test.csv"
         types_test_data = get_data.get_data_from_file(types_test_file, test_mode=True)[1]
         missing_test_data = get_data.get_data_from_file(missing_data_test_file, test_mode=True)[1]
         self.assertEqual(4, len(types_test_data))
