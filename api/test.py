@@ -3,6 +3,7 @@ import unittest
 import get_data
 import numpy as np
 import knn_classifier as knn_c
+import svm_classifier as svm_c
 from sklearn import datasets
 
 class TestTestingFramework(unittest.TestCase):
@@ -29,7 +30,6 @@ class TestTestingFramework(unittest.TestCase):
         knn_clf = knn_c.KNN_classifier(added_response, iris.feature_names+["response"], 'response')
         clf, score = knn_clf.train_model()
         self.assertGreater(score, .9)
-        self.assertEqual(5, clf.get_params()["n_neighbors"])
         
         #this prefix would probably need to be much more descriptive in production
         knn_clf.save_model(name="knn")
@@ -40,6 +40,28 @@ class TestTestingFramework(unittest.TestCase):
 
         recovered_metric = recovered_clf.score(train_features, train_response)
         self.assertEqual(score, recovered_metric)
+        print "knn iris results: ", recovered_metric
+        print recovered_clf
+
+    def test_svm_classifier_runs(self):
+        iris=datasets.load_iris()
+        added_response = np.array([ np.append(i,[j]) for i,j in zip(iris.data, iris.target)])
+        svm_clf = svm_c.SVM_classifier(added_response, iris.feature_names+["response"], 'response')
+        clf, score = svm_clf.train_model()
+        self.assertGreater(score, .9)
+        
+        #this prefix would probably need to be much more descriptive in production
+        svm_clf.save_model(name="svm")
+        recovered_clf = svm_clf.load_model(name="svm")
+
+        #this is NOT how this would be used; I'm just doing it this way to grab a test dataset
+        train_features, train_response = svm_clf.get_train_features_and_response()
+
+        recovered_metric = recovered_clf.score(train_features, train_response)
+        self.assertEqual(score, recovered_metric)
+        print "svm iris results: ", recovered_metric
+        print recovered_clf
+
 
 if __name__ == '__main__':
     unittest.main()

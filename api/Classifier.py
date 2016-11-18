@@ -70,7 +70,9 @@ class Classifier:
 
         #fit and return best model + it's scoring metric on the complete dataset
         clf.fit(train_features, train_response)
-        self.trained_clf = clf.get_params()['estimator'].fit(train_features, train_response)
+        params = clf.best_params_
+        self.trained_clf = clf.get_params()['estimator'].set_params(**params)
+        self.trained_clf.fit(train_features, train_response)
         self.metric = self.trained_clf.score(train_features, train_response)
         #return classifier with best CV params trained on the whole dataset and the metric of its success
         return self.trained_clf, self.metric
